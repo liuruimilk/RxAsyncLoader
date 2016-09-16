@@ -10,7 +10,11 @@
     tools:context="com.eiben.test.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="zhouxue!" />
+        android:background="@android:color/darker_gray"
+        android:text="zhouxue!"
+        android:elevation="5dp"
+        android:textColor="@android:color/"
+         />
 </RelativeLayout>
