@@ -5,4 +5,5 @@ package com.eiben.test;
  */
 public class Person {
 
+    public String name;
 }
