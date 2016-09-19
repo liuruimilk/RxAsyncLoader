@@ -4,3 +4,4 @@ build/*
 !.gitignore
 local.properties
 gradle/*
+testForIgnore.txt
