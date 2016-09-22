@@ -5,3 +5,5 @@ build/*
 local.properties
 gradle/*
 testForIgnore.txt
+projectFilesBackup/*
+RxHello.xml
