@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.eiben.test.rxmvp.ui.UserActivity;
+import com.eiben.test.rxsample.RxActivity;
 
 import rx.Observable;
 import rx.Observer;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void button1(View view) {
         startActivity(new Intent(this, UserActivity.class));
+    }
+    public void button2(View view) {
+        startActivity(new Intent(this, RxActivity.class));
     }
 
     private void observableCreate() {
