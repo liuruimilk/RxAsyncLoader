@@ -4,7 +4,7 @@ package com.eiben.test.rxorder;
  * Created by liumingrui on 16/9/23.
  */
 
-public class Data {
+public class Data{
     private String value;
 
     public Data(String value) {

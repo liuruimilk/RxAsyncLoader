@@ -6,14 +6,13 @@ import android.view.View;
 
 import com.eiben.test.Logger;
 import com.eiben.test.R;
+import com.google.gson.Gson;
 
 import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class RxOrderActivity extends AppCompatActivity {
 
-    Engine engine = new Engine();
+    DataEngine engine = new DataEngine();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class RxOrderActivity extends AppCompatActivity {
     }
 
     public void click(View v) {
-        engine.getData("com.eiben").subscribe(new Observer<Data>() {
+        engine.load(new Price("com.eiben"), new Price("com.zhouxue")).subscribe(new Observer<IData>() {
             @Override
             public void onCompleted() {
                 Logger.d("onCompleted");
@@ -34,8 +33,8 @@ public class RxOrderActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(Data data) {
-                Logger.d(data.getValue());
+            public void onNext(IData data) {
+                Logger.d(data.getData());
             }
         });
     }
