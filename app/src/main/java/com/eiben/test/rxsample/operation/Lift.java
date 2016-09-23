@@ -1,4 +1,4 @@
-package com.eiben.test.rxsample;
+package com.eiben.test.rxsample.operation;
 
 import android.util.Log;
 

@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".rxmvp.ui.UserActivity" />
-        <activity android:name=".rxsample.RxActivity"></activity>
+        <activity android:name=".rxsample.RxActivity" />
+        <activity android:name=".rxorder.RxOrderActivity"></activity>
     </application>
 
 </manifest>
