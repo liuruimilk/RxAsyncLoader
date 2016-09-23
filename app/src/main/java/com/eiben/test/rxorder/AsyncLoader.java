@@ -19,7 +19,7 @@ public class AsyncLoader {
         return Holder.loader;
     }
 
-    private DataEngine engine = new DataEngine();
+    private BaseDataEngine engine = new BaseDataEngine();
 
     public <T> void load(String url, View view, T t) {
 

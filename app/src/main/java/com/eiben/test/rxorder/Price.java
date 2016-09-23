@@ -41,4 +41,13 @@ public class Price implements IData, Serializable {
     public String getData() {
         return data;
     }
+
+    @Override
+    public String toString() {
+        return "Price{" +
+                "type=" + type +
+                ", data='" + data + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

@@ -6,9 +6,7 @@ import android.view.View;
 
 import com.eiben.test.Logger;
 import com.eiben.test.R;
-import com.google.gson.Gson;
 
-import rx.Observer;
 
 public class RxOrderActivity extends AppCompatActivity {
 
@@ -21,7 +19,7 @@ public class RxOrderActivity extends AppCompatActivity {
     }
 
     public void click(View v) {
-        engine.load(new Price("com.eiben"), new Price("com.zhouxue")).subscribe(new Observer<IData>() {
+        engine.load(new Price("com.eiben"), new Address("com.zhouxue"), new DataEngine.CallBack() {
             @Override
             public void onCompleted() {
                 Logger.d("onCompleted");
@@ -33,8 +31,13 @@ public class RxOrderActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(IData data) {
-                Logger.d(data.getData());
+            public void onNext(Price data) {
+                Logger.d(data.toString());
+            }
+
+            @Override
+            public void onNext(Address data) {
+                Logger.d(data.toString());
             }
         });
     }
