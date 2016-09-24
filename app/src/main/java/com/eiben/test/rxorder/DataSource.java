@@ -2,6 +2,8 @@ package com.eiben.test.rxorder;
 
 import android.text.TextUtils;
 
+import com.eiben.test.Logger;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -21,12 +23,7 @@ public class DataSource {
         return Observable.create(new Observable.OnSubscribe<IData>() {
             @Override
             public void call(Subscriber<? super IData> subscriber) {
-                IData temp = cache.get(data.getUrl());
-                if (null != temp) {
-                    temp.setData(data.getUrl() + " IData from cache");
-                    temp.setUrl(data.getUrl());
-                }
-                subscriber.onNext(temp);
+                subscriber.onNext(cache.get(data.getUrl()));
                 subscriber.onCompleted();
             }
         });
@@ -41,11 +38,14 @@ public class DataSource {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                String result = data.getUrl() + " IData from net";
+                String result = data.fromNet();
                 if (null == result || TextUtils.isEmpty(result)) {
-                    subscriber.onError(new Exception("net failed"));
+                    Logger.d(data.getUrl() + " net result empty");
+                    data.setErrorCode(-1);
+                    subscriber.onNext(data);
+                    subscriber.onCompleted();
                 } else {
-                    data.setData(result);
+                    data.analysisResult(result);
                     subscriber.onNext(data);
                     subscriber.onCompleted();
                 }
@@ -53,6 +53,10 @@ public class DataSource {
         }).doOnNext(new Action1<IData>() {
             @Override
             public void call(IData data) {
+                if (data.getErrorCode() != 0) {
+                    return;
+                }
+                Logger.d(data.getUrl() + "doOnNext");
                 cache.put(data.getUrl(), data);
             }
         });

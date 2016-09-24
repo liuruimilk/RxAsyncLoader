@@ -6,28 +6,23 @@ import java.io.Serializable;
  * Created by liumingrui on 16/9/24.
  */
 
-public class Price implements IData, Serializable {
+public class Price extends Data implements Serializable {
     private int type;
-    private String data;
-    private String url;
 
-    public Price(String url) {
-        this.url = url;
+    public Price(String url, int type) {
+        super(url);
+        this.type = type;
     }
 
     @Override
-    public void setData(String data) {
-        this.data = data;
+    public void analysisResult(String result) {
+        setData("price");
+        setType(1);
     }
 
     @Override
-    public String getUrl() {
-        return url;
-    }
-
-    @Override
-    public void setUrl(String url) {
-        this.url = url;
+    public String fromNet() {
+        return "";
     }
 
     public int getType() {
@@ -36,10 +31,6 @@ public class Price implements IData, Serializable {
 
     public void setType(int type) {
         this.type = type;
-    }
-
-    public String getData() {
-        return data;
     }
 
     @Override

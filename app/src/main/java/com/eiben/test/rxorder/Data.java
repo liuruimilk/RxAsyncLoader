@@ -4,18 +4,44 @@ package com.eiben.test.rxorder;
  * Created by liumingrui on 16/9/23.
  */
 
-public class Data{
-    private String value;
+public abstract class Data implements IData {
 
-    public Data(String value) {
-        this.value = value;
+    protected String url;
+    protected String data = "";
+    protected int errorCode = 0;
+    protected String fromNet;
+
+    public Data(String url) {
+        this.url = url;
     }
 
-    public String getValue() {
-        return value;
+    @Override
+    public String getUrl() {
+        return url;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    @Override
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getFromNet() {
+        return fromNet;
     }
 }

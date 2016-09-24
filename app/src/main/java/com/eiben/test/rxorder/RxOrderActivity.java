@@ -19,7 +19,7 @@ public class RxOrderActivity extends AppCompatActivity {
     }
 
     public void click(View v) {
-        engine.load(new Price("com.eiben"), new Address("com.zhouxue"), new DataEngine.CallBack() {
+        DataEngine.CallBack callBack = new DataEngine.CallBack() {
             @Override
             public void onCompleted() {
                 Logger.d("onCompleted");
@@ -39,6 +39,12 @@ public class RxOrderActivity extends AppCompatActivity {
             public void onNext(Address data) {
                 Logger.d(data.toString());
             }
-        });
+
+            @Override
+            public void onNext(User data) {
+                Logger.d(data.toString());
+            }
+        };
+        engine.load(callBack, new Address("com.zhouxue"), new Price("com.eiben", 1), new User("com.user"));
     }
 }

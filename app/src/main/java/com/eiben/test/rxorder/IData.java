@@ -5,8 +5,17 @@ package com.eiben.test.rxorder;
  */
 
 public interface IData {
-    void setData(String data);
+
     String getUrl();
-    void setUrl(String url);
+
     String getData();
+
+    void analysisResult(String result);
+
+    void setErrorCode(int code);
+
+    int getErrorCode();
+
+
+    String fromNet();
 }
