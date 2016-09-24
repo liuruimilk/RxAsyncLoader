@@ -39,7 +39,8 @@ public class DataSource {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                subscriber.onNext(data.fromNet());
+                String result = "NetData";
+                subscriber.onNext(result);
                 subscriber.onCompleted();
             }
         }).map(new Func1<String, IData>() {

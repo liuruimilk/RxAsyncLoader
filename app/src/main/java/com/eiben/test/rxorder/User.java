@@ -23,14 +23,8 @@ public class User extends Data implements Serializable {
     public void analysisResult(String result) {
         setData("liumingrui@yongche.com");
         setUsername("liumingrui");
-        data = "";
         setAge(18);
 
-    }
-
-    @Override
-    public String fromNet() {
-        return "jklasjkjdf";
     }
 
     public String getUsername() {

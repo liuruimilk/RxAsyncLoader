@@ -20,11 +20,6 @@ public class Address extends Data implements Serializable {
     }
 
     @Override
-    public String fromNet() {
-        return "address";
-    }
-
-    @Override
     public String toString() {
         return "Address{" +
                 "data='" + data + '\'' +

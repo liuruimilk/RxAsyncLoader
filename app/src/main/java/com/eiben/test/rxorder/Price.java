@@ -20,11 +20,6 @@ public class Price extends Data implements Serializable {
         setType(1);
     }
 
-    @Override
-    public String fromNet() {
-        return "";
-    }
-
     public int getType() {
         return type;
     }

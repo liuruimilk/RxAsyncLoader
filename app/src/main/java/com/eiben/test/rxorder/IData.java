@@ -15,7 +15,4 @@ public interface IData {
     void setErrorCode(int code);
 
     int getErrorCode();
-
-
-    String fromNet();
 }

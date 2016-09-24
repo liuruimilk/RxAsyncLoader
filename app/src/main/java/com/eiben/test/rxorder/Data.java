@@ -9,7 +9,6 @@ public abstract class Data implements IData {
     protected String url;
     protected String data = "";
     protected int errorCode = 0;
-    protected String fromNet;
 
     public Data(String url) {
         this.url = url;
@@ -39,9 +38,5 @@ public abstract class Data implements IData {
     @Override
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
-    }
-
-    public String getFromNet() {
-        return fromNet;
     }
 }
