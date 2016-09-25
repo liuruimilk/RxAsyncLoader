@@ -35,7 +35,6 @@ public class AsyncLoader {
 
     public void clearCache() {
         engine.dataSource.cache.clear();
-        engine.viewsHolder.cache.clear();
     }
 
     public void load(IParam... param) {
@@ -51,7 +50,7 @@ public class AsyncLoader {
             @Override
             public void onNext(IParam param) {
                 if (!TextUtils.isEmpty(param.getData())) {
-                    WeakReference<View> viewWeakReference = engine.viewsHolder.cache.get(param.getUrl());
+                    WeakReference<View> viewWeakReference = param.getView();
                     if (null != viewWeakReference) {
                         View view = viewWeakReference.get();
                         if (view != null) {

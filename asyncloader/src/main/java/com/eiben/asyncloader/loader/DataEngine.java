@@ -1,11 +1,7 @@
 package com.eiben.asyncloader.loader;
 
 
-import android.text.TextUtils;
-
-
 import com.eiben.asyncloader.loader.base.IParam;
-import com.eiben.asyncloader.loader.base.ViewsHolder;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -21,7 +17,6 @@ import rx.schedulers.Schedulers;
 
 public class DataEngine {
     DataSource dataSource = new DataSource();
-    ViewsHolder viewsHolder = new ViewsHolder();
 
     public Observable<IParam> load(final IParam... params) throws IllegalArgumentException {
         final Observable<IParam> observable = matchObservable(params);
@@ -35,17 +30,11 @@ public class DataEngine {
                     .doOnSubscribe(new Action0() {
                         @Override
                         public void call() {
-                            for (IParam d : params) {
-                                viewsHolder.cache.put(d.getUrl(), d.getView());
-                            }
                         }
                     })
                     .doOnNext(new Action1<IParam>() {
                         @Override
                         public void call(IParam iParam) {
-                            if (TextUtils.isEmpty(iParam.getData())) {
-                                viewsHolder.cache.remove(iParam.getUrl());
-                            }
                         }
                     })
                     .subscribeOn(Schedulers.io())
