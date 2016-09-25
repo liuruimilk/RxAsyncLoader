@@ -1,10 +1,10 @@
-package com.eiben.test.rxorder.loader;
+package com.eiben.asyncloader.loader;
 
 import android.text.TextUtils;
 import android.view.View;
 
-import com.eiben.test.Logger;
-import com.eiben.test.rxorder.loader.base.IParam;
+
+import com.eiben.asyncloader.loader.base.IParam;
 
 import java.lang.ref.WeakReference;
 
@@ -42,17 +42,14 @@ public class AsyncLoader {
         Observer observer = new Observer<IParam>() {
             @Override
             public void onCompleted() {
-                Logger.d("onCompleted");
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.d(e.getMessage());
             }
 
             @Override
             public void onNext(IParam param) {
-                Logger.d(param.toString());
                 if (!TextUtils.isEmpty(param.getData())) {
                     WeakReference<View> viewWeakReference = engine.viewsHolder.cache.get(param.getUrl());
                     if (null != viewWeakReference) {

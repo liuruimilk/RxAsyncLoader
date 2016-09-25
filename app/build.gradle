@@ -34,4 +34,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.code.gson:gson-parent:2.7'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
+    compile project(':asyncloader')
 }

@@ -1,9 +1,9 @@
-package com.eiben.test.rxorder.loader;
+package com.eiben.asyncloader.loader;
 
 import android.text.TextUtils;
 
-import com.eiben.test.Logger;
-import com.eiben.test.rxorder.loader.base.IParam;
+
+import com.eiben.asyncloader.loader.base.IParam;
 
 import java.util.Collections;
 import java.util.Map;
@@ -40,7 +40,8 @@ public class DataSource {
 
     public Map<String, IParam> cache = Collections.synchronizedMap(new WeakHashMap<String, IParam>());
 
-    public Observable<IParam> fromCache(IParam data) {
+    public Observable<IParam> fromCache(final IParam data) {
+
         return Observable.create(new Observable.OnSubscribe<IParam>() {
             @Override
             public void call(Subscriber<? super IParam> subscriber) {
@@ -50,7 +51,7 @@ public class DataSource {
         });
     }
 
-    public Observable<IParam> fromNet(IParam data) {
+    public Observable<IParam> fromNet(final IParam data) {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
@@ -81,7 +82,6 @@ public class DataSource {
                 if (data.getErrorCode() != 0) {
                     return;
                 }
-                Logger.d(data.getUrl() + " doOnNext");
                 cache.put(data.getUrl(), data);
             }
         });

@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.eiben.asyncloader.loader.AsyncLoader;
 import com.eiben.test.R;
-import com.eiben.test.rxorder.loader.AsyncLoader;
 import com.eiben.test.rxorder.model.AddressParam;
 import com.eiben.test.rxorder.model.PriceParam;
 import com.eiben.test.rxorder.model.UserParam;

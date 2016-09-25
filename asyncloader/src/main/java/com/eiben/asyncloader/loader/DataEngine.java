@@ -1,11 +1,11 @@
-package com.eiben.test.rxorder.loader;
+package com.eiben.asyncloader.loader;
 
 
 import android.text.TextUtils;
 
-import com.eiben.test.Logger;
-import com.eiben.test.rxorder.loader.base.ViewsHolder;
-import com.eiben.test.rxorder.loader.base.IParam;
+
+import com.eiben.asyncloader.loader.base.IParam;
+import com.eiben.asyncloader.loader.base.ViewsHolder;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -23,8 +23,8 @@ public class DataEngine {
     DataSource dataSource = new DataSource();
     ViewsHolder viewsHolder = new ViewsHolder();
 
-    public Observable<IParam> load(IParam... params) throws IllegalArgumentException {
-        Observable<IParam> observable = matchObservable(params);
+    public Observable<IParam> load(final IParam... params) throws IllegalArgumentException {
+        final Observable<IParam> observable = matchObservable(params);
         if (null != observable) {
             return Observable.defer(new Func0<Observable<IParam>>() {
                 @Override
@@ -87,7 +87,6 @@ public class DataEngine {
     }
 
     private Observable<IParam> getData(IParam data) {
-        Logger.d("do load cache and net");
         return Observable.concat(
                 dataSource.fromCache(data),
                 dataSource.fromNet(data))
@@ -95,7 +94,6 @@ public class DataEngine {
                     @Override
                     public Boolean call(IParam data) {
                         boolean flag = (data == null ? false : true);
-                        Logger.d("filter : " + flag);
                         return flag;
                     }
                 });

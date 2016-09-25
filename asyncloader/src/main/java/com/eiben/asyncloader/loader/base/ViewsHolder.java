@@ -1,4 +1,4 @@
-package com.eiben.test.rxorder.loader.base;
+package com.eiben.asyncloader.loader.base;
 
 import android.view.View;
 
@@ -12,5 +12,5 @@ import java.util.WeakHashMap;
  */
 
 public class ViewsHolder {
-    public Map<String, WeakReference<View>> cache = Collections.synchronizedMap(new WeakHashMap<>());
+    public Map<String, WeakReference<View>> cache = Collections.synchronizedMap(new WeakHashMap<String, WeakReference<View>>());
 }

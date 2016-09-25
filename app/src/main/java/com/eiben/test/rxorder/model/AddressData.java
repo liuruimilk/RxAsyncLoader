@@ -3,7 +3,7 @@ package com.eiben.test.rxorder.model;
 
 import android.view.View;
 
-import com.eiben.test.rxorder.loader.base.BaseData;
+import com.eiben.asyncloader.loader.base.BaseData;
 
 import java.io.Serializable;
 
