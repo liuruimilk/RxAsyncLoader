@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/liumingrui/develop/git/RxHello/asyncloader/src/main/assets"/><source path="/Users/liumingrui/develop/git/RxHello/asyncloader/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/liumingrui/develop/git/RxHello/asyncloader/src/release/assets"/></dataSet></merger>
