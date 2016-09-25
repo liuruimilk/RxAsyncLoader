@@ -1,19 +1,12 @@
 package com.eiben.test.rxorder;
 
 
-import android.icu.util.ICUUncheckedIOException;
 import android.text.TextUtils;
 
 import com.eiben.test.Logger;
-import com.eiben.test.rxorder.model.Address;
-import com.eiben.test.rxorder.model.IData;
-import com.eiben.test.rxorder.model.Price;
-import com.eiben.test.rxorder.model.User;
-
-import org.w3c.dom.Text;
+import com.eiben.test.rxorder.model.IParam;
 
 import rx.Observable;
-import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -29,60 +22,68 @@ public class DataEngine {
     DataSource dataSource = new DataSource();
     ViewsHolder viewsHolder = new ViewsHolder();
 
-    public Observable<IData> load(IData... data) throws IllegalArgumentException{
-        Observable<IData> temp = null;
-        if (data.length == 2) {
-            temp = load(data[0], data[1]);
-        } else if (data.length == 3) {
-            temp = load(data[0], data[1], data[2]);
-        }
+    public Observable<IParam> load(IParam... params) throws IllegalArgumentException {
+        Observable<IParam> temp = matchObservable(params);
         if (null != temp) {
-            Observable<IData> observable = temp;
-            return Observable.defer(new Func0<Observable<IData>>() {
+            Observable<IParam> observable = temp;
+            return Observable.defer(new Func0<Observable<IParam>>() {
                 @Override
-                public Observable<IData> call() {
+                public Observable<IParam> call() {
                     return observable;
                 }
             })
                     .doOnSubscribe(new Action0() {
                         @Override
                         public void call() {
-                            for (IData d : data) {
+                            for (IParam d : params) {
                                 viewsHolder.cache.put(d.getUrl(), d.getView());
                             }
                         }
                     })
-                    .doOnNext(new Action1<IData>() {
+                    .doOnNext(new Action1<IParam>() {
                         @Override
-                        public void call(IData iData) {
-                            if (TextUtils.isEmpty(iData.getData())) {
-                                viewsHolder.cache.remove(iData.getUrl());
+                        public void call(IParam iParam) {
+                            if (TextUtils.isEmpty(iParam.getData())) {
+                                viewsHolder.cache.remove(iParam.getUrl());
                             }
                         }
                     })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread());
-        }else {
+        } else {
             throw new IllegalArgumentException("参数超出支持范围");
         }
     }
 
+    public Observable<IParam> matchObservable(IParam... param) {
+        if (null == param || param.length == 0) {
+            return null;
+        }
+        Observable<IParam> temp = null;
+        if (param.length == 2) {
+            temp = load(param[0], param[1]);
+        } else if (param.length == 3) {
+            temp = load(param[0], param[1], param[2]);
+        }
+        return temp;
+    }
 
-    private Observable<IData> load(IData data1, IData data2) {
+
+    private Observable<IParam> load(IParam data1, IParam data2) {
         return Observable.concat(getData(data1), getData(data2));
     }
 
-    private Observable<IData> load(IData data1, IData data2, IData data3) {
+    private Observable<IParam> load(IParam data1, IParam data2, IParam data3) {
         return Observable.concat(getData(data1), getData(data2), getData(data3));
     }
 
-    private Observable<IData> getData(IData data) {
+    private Observable<IParam> getData(IParam data) {
         return Observable.concat(
                 dataSource.fromCache(data),
                 dataSource.fromNet(data))
-                .first(new Func1<IData, Boolean>() {
+                .first(new Func1<IParam, Boolean>() {
                     @Override
-                    public Boolean call(IData data) {
+                    public Boolean call(IParam data) {
                         boolean flag = (data == null ? false : true);
                         Logger.d("filter : " + flag);
                         return flag;

@@ -3,7 +3,7 @@ package com.eiben.test.rxorder;
 import android.text.TextUtils;
 
 import com.eiben.test.Logger;
-import com.eiben.test.rxorder.model.IData;
+import com.eiben.test.rxorder.model.IParam;
 
 import java.util.Collections;
 import java.util.Map;
@@ -38,19 +38,19 @@ public class DataSource {
             "net 15",
     };
 
-    public Map<String, IData> cache = Collections.synchronizedMap(new WeakHashMap<String, IData>());
+    public Map<String, IParam> cache = Collections.synchronizedMap(new WeakHashMap<String, IParam>());
 
-    public Observable<IData> fromCache(IData data) {
-        return Observable.create(new Observable.OnSubscribe<IData>() {
+    public Observable<IParam> fromCache(IParam data) {
+        return Observable.create(new Observable.OnSubscribe<IParam>() {
             @Override
-            public void call(Subscriber<? super IData> subscriber) {
+            public void call(Subscriber<? super IParam> subscriber) {
                 subscriber.onNext(cache.get(data.getUrl()));
                 subscriber.onCompleted();
             }
         });
     }
 
-    public Observable<IData> fromNet(IData data) {
+    public Observable<IParam> fromNet(IParam data) {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
@@ -65,9 +65,9 @@ public class DataSource {
                 subscriber.onNext(result);
                 subscriber.onCompleted();
             }
-        }).map(new Func1<String, IData>() {
+        }).map(new Func1<String, IParam>() {
             @Override
-            public IData call(String s) {
+            public IParam call(String s) {
                 if (null == s || TextUtils.isEmpty(s)) {
                     data.setErrorCode(-1);
                 } else {
@@ -75,9 +75,9 @@ public class DataSource {
                 }
                 return data;
             }
-        }).doOnNext(new Action1<IData>() {
+        }).doOnNext(new Action1<IParam>() {
             @Override
-            public void call(IData data) {
+            public void call(IParam data) {
                 if (data.getErrorCode() != 0) {
                     return;
                 }

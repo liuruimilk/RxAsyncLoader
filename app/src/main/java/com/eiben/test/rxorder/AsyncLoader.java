@@ -2,13 +2,9 @@ package com.eiben.test.rxorder;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
 import com.eiben.test.Logger;
-import com.eiben.test.rxorder.model.Address;
-import com.eiben.test.rxorder.model.IData;
-import com.eiben.test.rxorder.model.Price;
-import com.eiben.test.rxorder.model.User;
+import com.eiben.test.rxorder.model.IParam;
 
 import java.lang.ref.WeakReference;
 
@@ -42,8 +38,8 @@ public class AsyncLoader {
         engine.viewsHolder.cache.clear();
     }
 
-    public void load(IData... data) {
-        Observer observer = new Observer<IData>() {
+    public void load(IParam... param) {
+        Observer observer = new Observer<IParam>() {
             @Override
             public void onCompleted() {
                 Logger.d("onCompleted");
@@ -55,21 +51,21 @@ public class AsyncLoader {
             }
 
             @Override
-            public void onNext(IData data) {
-                Logger.d(data.toString());
-                if (!TextUtils.isEmpty(data.getData())) {
-                    WeakReference<View> viewWeakReference = engine.viewsHolder.cache.get(data.getUrl());
+            public void onNext(IParam param) {
+                Logger.d(param.toString());
+                if (!TextUtils.isEmpty(param.getData())) {
+                    WeakReference<View> viewWeakReference = engine.viewsHolder.cache.get(param.getUrl());
                     if (null != viewWeakReference) {
                         View view = viewWeakReference.get();
                         if (view != null) {
-                            data.doSomeThing(view);
+                            param.doSomeThing(view);
                         }
                     }
                 }
             }
         };
         try {
-            Observable<IData> observable = engine.load(data);
+            Observable<IParam> observable = engine.load(param);
             observable.subscribe(observer);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

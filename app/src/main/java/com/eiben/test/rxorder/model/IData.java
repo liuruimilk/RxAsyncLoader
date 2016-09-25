@@ -5,12 +5,14 @@ import android.view.View;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by liumingrui on 16/9/23.
+ * Created by liumingrui on 16/9/25.
  */
 
 public interface IData {
 
     String getUrl();
+
+    void setData(String data);
 
     String getData();
 
@@ -19,8 +21,4 @@ public interface IData {
     int getErrorCode();
 
     WeakReference<View> getView();
-
-    void analysisResult(String result);
-
-    void doSomeThing(View v);
 }

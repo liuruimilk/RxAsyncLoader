@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.eiben.test.R;
-import com.eiben.test.rxorder.model.Address;
-import com.eiben.test.rxorder.model.Price;
-import com.eiben.test.rxorder.model.User;
+import com.eiben.test.rxorder.model.AddressData;
+import com.eiben.test.rxorder.model.AddressParam;
+import com.eiben.test.rxorder.model.PriceData;
+import com.eiben.test.rxorder.model.PriceParam;
+import com.eiben.test.rxorder.model.UserData;
+import com.eiben.test.rxorder.model.UserParam;
 
 
 public class RxOrderActivity extends AppCompatActivity {
@@ -60,11 +63,11 @@ public class RxOrderActivity extends AppCompatActivity {
     }
 
     public void click(View v) {
-        AsyncLoader.getInstance().load(new Price("com.eiben1", tv1), new Address("com.zhouxue2", tv2), new User("com.liumingrui3", tv3));
-        AsyncLoader.getInstance().load(new Price("com.eiben4", tv4), new Address("com.zhouxue5", tv5), new User("com.liumingrui6", tv6));
-        AsyncLoader.getInstance().load(new Price("com.eiben7", tv7), new Address("com.zhouxue8", tv8), new User("com.liumingrui9", tv9));
-        AsyncLoader.getInstance().load(new Price("com.eiben10", tv10), new Address("com.zhouxue11", tv11), new User("com.liumingrui12", tv12));
-        AsyncLoader.getInstance().load(new Price("com.eiben13", tv13), new Address("com.zhouxue14", tv14), new User("com.liumingrui15", tv15));
+        AsyncLoader.getInstance().load(new PriceParam("com.eiben1", tv1), new AddressParam("com.zhouxue2", tv2), new UserParam("com.liumingrui3", tv3));
+        AsyncLoader.getInstance().load(new PriceParam("com.eiben4", tv4), new AddressParam("com.zhouxue5", tv5), new UserParam("com.liumingrui6", tv6));
+        AsyncLoader.getInstance().load(new PriceParam("com.eiben7", tv7), new AddressParam("com.zhouxue8", tv8), new UserParam("com.liumingrui9", tv9));
+        AsyncLoader.getInstance().load(new PriceParam("com.eiben10", tv10), new AddressParam("com.zhouxue11", tv11), new UserParam("com.liumingrui12", tv12));
+        AsyncLoader.getInstance().load(new PriceParam("com.eiben13", tv13), new AddressParam("com.zhouxue14", tv14), new UserParam("com.liumingrui15", tv15));
     }
 
     public void clearData(View v) {
