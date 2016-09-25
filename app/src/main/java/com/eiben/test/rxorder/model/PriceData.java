@@ -1,9 +1,8 @@
 package com.eiben.test.rxorder.model;
 
 import android.view.View;
-import android.widget.TextView;
 
-import java.io.Serializable;
+import com.eiben.test.rxorder.loader.base.BaseData;
 
 /**
  * Created by liumingrui on 16/9/24.

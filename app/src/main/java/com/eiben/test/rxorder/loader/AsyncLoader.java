@@ -1,10 +1,10 @@
-package com.eiben.test.rxorder;
+package com.eiben.test.rxorder.loader;
 
 import android.text.TextUtils;
 import android.view.View;
 
 import com.eiben.test.Logger;
-import com.eiben.test.rxorder.model.IParam;
+import com.eiben.test.rxorder.loader.base.IParam;
 
 import java.lang.ref.WeakReference;
 

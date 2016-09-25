@@ -1,10 +1,11 @@
-package com.eiben.test.rxorder;
+package com.eiben.test.rxorder.loader;
 
 
 import android.text.TextUtils;
 
 import com.eiben.test.Logger;
-import com.eiben.test.rxorder.model.IParam;
+import com.eiben.test.rxorder.loader.base.ViewsHolder;
+import com.eiben.test.rxorder.loader.base.IParam;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -23,9 +24,8 @@ public class DataEngine {
     ViewsHolder viewsHolder = new ViewsHolder();
 
     public Observable<IParam> load(IParam... params) throws IllegalArgumentException {
-        Observable<IParam> temp = matchObservable(params);
-        if (null != temp) {
-            Observable<IParam> observable = temp;
+        Observable<IParam> observable = matchObservable(params);
+        if (null != observable) {
             return Observable.defer(new Func0<Observable<IParam>>() {
                 @Override
                 public Observable<IParam> call() {
@@ -60,7 +60,9 @@ public class DataEngine {
             return null;
         }
         Observable<IParam> temp = null;
-        if (param.length == 2) {
+        if (param.length == 1) {
+            temp = load(param[0]);
+        } else if (param.length == 2) {
             temp = load(param[0], param[1]);
         } else if (param.length == 3) {
             temp = load(param[0], param[1], param[2]);
@@ -68,6 +70,9 @@ public class DataEngine {
         return temp;
     }
 
+    private Observable<IParam> load(IParam data) {
+        return getData(data);
+    }
 
     private Observable<IParam> load(IParam data1, IParam data2) {
         return Observable.concat(getData(data1), getData(data2));
@@ -77,7 +82,12 @@ public class DataEngine {
         return Observable.concat(getData(data1), getData(data2), getData(data3));
     }
 
+    private Observable<IParam> load(IParam data1, IParam data2, IParam data3, IParam data4) {
+        return Observable.concat(getData(data1), getData(data2), getData(data3), getData(data4));
+    }
+
     private Observable<IParam> getData(IParam data) {
+        Logger.d("do load cache and net");
         return Observable.concat(
                 dataSource.fromCache(data),
                 dataSource.fromNet(data))

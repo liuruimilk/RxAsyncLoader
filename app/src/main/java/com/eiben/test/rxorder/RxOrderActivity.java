@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.eiben.test.R;
-import com.eiben.test.rxorder.model.AddressData;
+import com.eiben.test.rxorder.loader.AsyncLoader;
 import com.eiben.test.rxorder.model.AddressParam;
-import com.eiben.test.rxorder.model.PriceData;
 import com.eiben.test.rxorder.model.PriceParam;
-import com.eiben.test.rxorder.model.UserData;
 import com.eiben.test.rxorder.model.UserParam;
 
 
@@ -36,6 +34,8 @@ public class RxOrderActivity extends AppCompatActivity {
     private TextView tv14;
     private TextView tv15;
 
+    private TextView tv16;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +60,8 @@ public class RxOrderActivity extends AppCompatActivity {
         tv13 = (TextView) findViewById(R.id.tv_13);
         tv14 = (TextView) findViewById(R.id.tv_14);
         tv15 = (TextView) findViewById(R.id.tv_15);
+
+        tv16 = (TextView) findViewById(R.id.tv_16);
     }
 
     public void click(View v) {
@@ -68,6 +70,8 @@ public class RxOrderActivity extends AppCompatActivity {
         AsyncLoader.getInstance().load(new PriceParam("com.eiben7", tv7), new AddressParam("com.zhouxue8", tv8), new UserParam("com.liumingrui9", tv9));
         AsyncLoader.getInstance().load(new PriceParam("com.eiben10", tv10), new AddressParam("com.zhouxue11", tv11), new UserParam("com.liumingrui12", tv12));
         AsyncLoader.getInstance().load(new PriceParam("com.eiben13", tv13), new AddressParam("com.zhouxue14", tv14), new UserParam("com.liumingrui15", tv15));
+
+        AsyncLoader.getInstance().load(new AddressParam("xihuan", tv16));
     }
 
     public void clearData(View v) {
@@ -90,6 +94,8 @@ public class RxOrderActivity extends AppCompatActivity {
         tv13.setText("本地数据1");
         tv14.setText("本地数据2");
         tv15.setText("本地数据3");
+
+        tv16.setText("本地数据16");
     }
 
     public void clearCache(View v) {

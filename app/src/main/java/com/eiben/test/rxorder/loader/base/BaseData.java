@@ -1,4 +1,4 @@
-package com.eiben.test.rxorder.model;
+package com.eiben.test.rxorder.loader.base;
 
 import android.view.View;
 
