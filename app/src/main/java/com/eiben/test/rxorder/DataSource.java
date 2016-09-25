@@ -3,9 +3,11 @@ package com.eiben.test.rxorder;
 import android.text.TextUtils;
 
 import com.eiben.test.Logger;
+import com.eiben.test.rxorder.model.IData;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Random;
 import java.util.WeakHashMap;
 
 import rx.Observable;
@@ -18,6 +20,24 @@ import rx.functions.Func1;
  */
 
 public class DataSource {
+    static String[] datas = {
+            "net 1",
+            "net 2",
+            "net 3",
+            "",
+            "net 5",
+            "",
+            "net 7",
+            "net 8",
+            "net 9",
+            "",
+            "net 11",
+            "net 12",
+            "net 13",
+            "",
+            "net 15",
+    };
+
     public Map<String, IData> cache = Collections.synchronizedMap(new WeakHashMap<String, IData>());
 
     public Observable<IData> fromCache(IData data) {
@@ -35,11 +55,13 @@ public class DataSource {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                String result = "NetData";
+                Random rand = new Random();
+                int i = rand.nextInt(15);
+                String result = datas[i];
                 subscriber.onNext(result);
                 subscriber.onCompleted();
             }

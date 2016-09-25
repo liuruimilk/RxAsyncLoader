@@ -1,4 +1,8 @@
-package com.eiben.test.rxorder;
+package com.eiben.test.rxorder.model;
+
+import android.view.View;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by liumingrui on 16/9/23.
@@ -9,9 +13,20 @@ public abstract class Data implements IData {
     protected String url;
     protected String data = "";
     protected int errorCode = 0;
+    protected WeakReference<View> view;
 
-    public Data(String url) {
+    @Override
+    public WeakReference<View> getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = new WeakReference<>(view);
+    }
+
+    public Data(String url, View v) {
         this.url = url;
+        this.view = new WeakReference<>(v);
     }
 
     @Override

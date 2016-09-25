@@ -1,12 +1,22 @@
 package com.eiben.test.rxorder;
 
 
+import android.icu.util.ICUUncheckedIOException;
+import android.text.TextUtils;
 
 import com.eiben.test.Logger;
+import com.eiben.test.rxorder.model.Address;
+import com.eiben.test.rxorder.model.IData;
+import com.eiben.test.rxorder.model.Price;
+import com.eiben.test.rxorder.model.User;
+
+import org.w3c.dom.Text;
 
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -16,9 +26,10 @@ import rx.schedulers.Schedulers;
  */
 
 public class DataEngine {
-    private DataSource dataSource = new DataSource();
+    DataSource dataSource = new DataSource();
+    ViewsHolder viewsHolder = new ViewsHolder();
 
-    public void load(CallBack call, IData... data) {
+    public Observable<IData> load(IData... data) throws IllegalArgumentException{
         Observable<IData> temp = null;
         if (data.length == 2) {
             temp = load(data[0], data[1]);
@@ -27,40 +38,32 @@ public class DataEngine {
         }
         if (null != temp) {
             Observable<IData> observable = temp;
-            Observable.defer(new Func0<Observable<IData>>() {
+            return Observable.defer(new Func0<Observable<IData>>() {
                 @Override
                 public Observable<IData> call() {
                     return observable;
                 }
-            }).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<IData>() {
+            })
+                    .doOnSubscribe(new Action0() {
                         @Override
-                        public void onCompleted() {
-                            call.onCompleted();
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            call.onError(e);
-                        }
-
-                        @Override
-                        public void onNext(IData data) {
-                            if (data instanceof Price) {
-                                Price p = (Price) data;
-                                call.onNext(p);
-                            }
-                            if (data instanceof Address) {
-                                Address a = (Address) data;
-                                call.onNext(a);
-                            }
-                            if (data instanceof User) {
-                                User u = (User) data;
-                                call.onNext(u);
+                        public void call() {
+                            for (IData d : data) {
+                                viewsHolder.cache.put(d.getUrl(), d.getView());
                             }
                         }
-                    });
+                    })
+                    .doOnNext(new Action1<IData>() {
+                        @Override
+                        public void call(IData iData) {
+                            if (TextUtils.isEmpty(iData.getData())) {
+                                viewsHolder.cache.remove(iData.getUrl());
+                            }
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+        }else {
+            throw new IllegalArgumentException("参数超出支持范围");
         }
     }
 
@@ -86,17 +89,5 @@ public class DataEngine {
                     }
                 });
 
-    }
-
-    public interface CallBack {
-        void onCompleted();
-
-        void onError(Throwable e);
-
-        void onNext(Price data);
-
-        void onNext(Address data);
-
-        void onNext(User data);
     }
 }

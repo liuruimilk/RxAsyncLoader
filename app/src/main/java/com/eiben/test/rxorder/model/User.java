@@ -1,4 +1,7 @@
-package com.eiben.test.rxorder;
+package com.eiben.test.rxorder.model;
+
+import android.view.View;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
@@ -10,8 +13,8 @@ public class User extends Data implements Serializable {
     private String username;
     private int age;
 
-    public User(String url) {
-        super(url);
+    public User(String url, View v) {
+        super(url, v);
     }
 
     @Override
@@ -21,10 +24,16 @@ public class User extends Data implements Serializable {
 
     @Override
     public void analysisResult(String result) {
-        setData("liumingrui@yongche.com");
+        setData(result);
         setUsername("liumingrui");
         setAge(18);
 
+    }
+
+    @Override
+    public void doSomeThing(View v) {
+        TextView tv = (TextView) v;
+        tv.setText(data + " user");
     }
 
     public String getUsername() {

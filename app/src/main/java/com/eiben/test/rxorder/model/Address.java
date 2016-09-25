@@ -1,5 +1,8 @@
-package com.eiben.test.rxorder;
+package com.eiben.test.rxorder.model;
 
+
+import android.view.View;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
@@ -10,13 +13,19 @@ import java.io.Serializable;
 public class Address extends Data implements Serializable {
 
 
-    public Address(String url) {
-        super(url);
+    public Address(String url,View v) {
+        super(url,v);
     }
 
     @Override
     public void analysisResult(String result) {
-        setData("address");
+        setData(result);
+    }
+
+    @Override
+    public void doSomeThing(View v) {
+        TextView tv = (TextView) v;
+        tv.setText(data + "address");
     }
 
     @Override

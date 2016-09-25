@@ -1,4 +1,7 @@
-package com.eiben.test.rxorder;
+package com.eiben.test.rxorder.model;
+
+import android.view.View;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
@@ -9,15 +12,20 @@ import java.io.Serializable;
 public class Price extends Data implements Serializable {
     private int type;
 
-    public Price(String url, int type) {
-        super(url);
-        this.type = type;
+    public Price(String url, View v) {
+        super(url, v);
     }
 
     @Override
     public void analysisResult(String result) {
-        setData("price");
+        setData(result);
         setType(1);
+    }
+
+    @Override
+    public void doSomeThing(View v) {
+        TextView tv = (TextView) v;
+        tv.setText(data + " price");
     }
 
     public int getType() {
