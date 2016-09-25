@@ -1,11 +1,14 @@
 package com.eiben.test.rxmvp.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * git  * Created by liumingrui on 16/9/17.
  */
 public class User {
-
+    @SerializedName(value = "name", alternate = {"name", "username"})
     private String name = "";
+    @SerializedName(value = "email", alternate = {"email", "email_address"})
     private String email = "";
 
     public User(String name) {

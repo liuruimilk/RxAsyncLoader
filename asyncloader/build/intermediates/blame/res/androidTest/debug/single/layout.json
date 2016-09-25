@@ -144,11 +144,11 @@
         "source": "/Users/liumingrui/develop/git/RxHello/asyncloader/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/layout/select_dialog_multichoice_material.xml"
     },
     {
-        "merged": "/Users/liumingrui/develop/git/RxHello/asyncloader/build/intermediates/res/merged/androidTest/debug/layout/abc_activity_chooser_view.xml",
-        "source": "/Users/liumingrui/develop/git/RxHello/asyncloader/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/layout/abc_activity_chooser_view.xml"
-    },
-    {
         "merged": "/Users/liumingrui/develop/git/RxHello/asyncloader/build/intermediates/res/merged/androidTest/debug/layout/notification_template_lines.xml",
         "source": "/Users/liumingrui/develop/git/RxHello/asyncloader/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/layout/notification_template_lines.xml"
+    },
+    {
+        "merged": "/Users/liumingrui/develop/git/RxHello/asyncloader/build/intermediates/res/merged/androidTest/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/liumingrui/develop/git/RxHello/asyncloader/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/layout/abc_activity_chooser_view.xml"
     }
 ]

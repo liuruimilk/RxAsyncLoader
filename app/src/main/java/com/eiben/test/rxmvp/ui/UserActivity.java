@@ -8,6 +8,9 @@ import com.eiben.test.R;
 import com.eiben.test.rxmvp.contact.IUserContact;
 import com.eiben.test.rxmvp.presenter.UserPresenter;
 
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
+
 public class UserActivity extends AppCompatActivity implements IUserContact.IView, IUserContact.IPresenter {
 
     private IUserContact.IPresenter presenter;

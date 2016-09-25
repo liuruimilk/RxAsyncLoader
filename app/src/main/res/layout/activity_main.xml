@@ -25,4 +25,18 @@
         android:onClick="button1"
         android:text="mvp and rxjava" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="button2"
+        android:text="rxjava sample" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="button3"
+        android:text="rxorder" />
+
 </LinearLayout>

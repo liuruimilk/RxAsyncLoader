@@ -2,11 +2,14 @@ package com.eiben.test;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
 import com.eiben.test.rxmvp.ui.UserActivity;
+import com.eiben.test.rxorder.RxOrderActivity;
+import com.eiben.test.rxsample.RxActivity;
 
 import rx.Observable;
 import rx.Observer;
@@ -23,12 +26,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build());
+        }
         publishSubject();
     }
 
     public void button1(View view) {
         startActivity(new Intent(this, UserActivity.class));
+    }
+    public void button2(View view) {
+        startActivity(new Intent(this, RxActivity.class));
+    }
+    public void button3(View view) {
+        startActivity(new Intent(this, RxOrderActivity.class));
     }
 
     private void observableCreate() {
