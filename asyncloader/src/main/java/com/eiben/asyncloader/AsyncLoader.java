@@ -94,22 +94,11 @@ public class AsyncLoader {
         };
         try {
             Observable<ITask> observable = engine.load(task);
-            observable.doOnSubscribe(new Action0() {
-                @Override
-                public void call() {
-
-                }
-            });
             observable.subscribe(observer);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
     }
-
-    private void prepareTask() {
-
-    }
-
 
     public void removeCache(String url) {
         engine.dataSource.cache.remove(url);

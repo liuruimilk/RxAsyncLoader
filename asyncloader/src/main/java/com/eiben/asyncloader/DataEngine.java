@@ -1,8 +1,8 @@
 package com.eiben.asyncloader;
 
 
-
 import android.text.TextUtils;
+import android.view.View;
 
 import com.eiben.asyncloader.base.ITask;
 
@@ -13,6 +13,7 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
@@ -41,6 +42,10 @@ public class DataEngine {
 
     public boolean containsTask(int key) {
         return taskMap.containsKey(key);
+    }
+
+    private void addTask(int key, String value) {
+        taskMap.put(key, value);
     }
 
     public void clearTask() {
@@ -122,7 +127,7 @@ public class DataEngine {
         return Observable.concat(getData(data1), getData(data2), getData(data3), getData(data4));
     }
 
-    private Observable<ITask> getData(ITask data) {
+    private Observable<ITask> getData(final ITask data) {
         return Observable.concat(
                 dataSource.fromCache(data),
                 dataSource.fromNet(data))
@@ -132,6 +137,16 @@ public class DataEngine {
                         boolean flag = (data == null ? false : true);
                         Logger.d("first : " + flag);
                         return flag;
+                    }
+                })
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        Logger.d("doOnSubscribe");
+                        View view = data.getView().get();
+                        if (null != view) {
+                            addTask(view.getId(), data.getUri().uri);
+                        }
                     }
                 });
 

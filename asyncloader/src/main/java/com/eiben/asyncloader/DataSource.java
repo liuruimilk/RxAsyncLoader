@@ -20,7 +20,7 @@ import rx.functions.Func1;
 
 public class DataSource {
 
-    public Map<String, ITask> cache = Collections.synchronizedMap(new WeakHashMap<String, ITask>());
+    public Map<String, String> cache = Collections.synchronizedMap(new WeakHashMap<String, String>());
 
     public Observable<ITask> fromCache(final ITask task) {
 
@@ -28,7 +28,14 @@ public class DataSource {
             @Override
             public void call(Subscriber<? super ITask> subscriber) {
                 Logger.d("from cache");
-                subscriber.onNext(cache.get(task.getUri()));
+
+                String cacheResult = cache.get(task.getUri());
+                if (TextUtils.isEmpty(cacheResult)) {
+                    subscriber.onNext(null);
+                } else {
+                    task.setData(cacheResult);
+                    subscriber.onNext(task);
+                }
                 subscriber.onCompleted();
             }
         });
@@ -65,7 +72,7 @@ public class DataSource {
                 if (data.getErrorCode() != 0) {
                     return;
                 }
-                cache.put(data.getUri().uri, data);
+                cache.put(data.getUri().uri, data.getData());
             }
         });
     }
