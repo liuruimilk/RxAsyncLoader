@@ -13,6 +13,11 @@ public abstract class BaseTask implements ITask {
     private IData data;
 
     @Override
+    public int getID() {
+        return data.getID();
+    }
+
+    @Override
     public IData getDataSource() {
         return data;
     }

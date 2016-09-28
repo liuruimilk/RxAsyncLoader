@@ -10,16 +10,22 @@ import java.lang.ref.WeakReference;
 
 public class BaseData implements IData {
 
+    protected int id;
     protected LoadUri uri;
     protected String data = "";
     protected int errorCode = 0;
     protected WeakReference<View> view;
 
     public BaseData(LoadUri uri, View view) {
+        this.id = view.getId();
         this.uri = uri;
         this.view = new WeakReference<>(view);
     }
 
+    @Override
+    public int getID() {
+        return id;
+    }
 
     @Override
     public LoadUri getUri() {

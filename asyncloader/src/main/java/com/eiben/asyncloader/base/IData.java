@@ -10,6 +10,8 @@ import java.lang.ref.WeakReference;
 
 public interface IData {
 
+    int getID();
+
     LoadUri getUri();
 
     void setData(String data);

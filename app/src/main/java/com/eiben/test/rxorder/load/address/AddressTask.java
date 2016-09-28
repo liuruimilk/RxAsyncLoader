@@ -19,7 +19,7 @@ public class AddressTask extends BaseTask {
 
     @Override
     public String fromNet() {
-        return "address";
+        return "";
     }
 
     @Override
@@ -42,4 +42,5 @@ public class AddressTask extends BaseTask {
     public boolean checkDataValid() {
         return !TextUtils.isEmpty(getData());
     }
+
 }

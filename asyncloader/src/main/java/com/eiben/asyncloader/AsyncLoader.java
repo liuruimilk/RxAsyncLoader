@@ -87,9 +87,10 @@ public class AsyncLoader {
                             Logger.d("action -> doSomeThingUI");
                             task.doSomeThingUI(view);
                         }
-                        engine.cancleTask(view.getId());
                     }
                 }
+                engine.cancleTask(task.getID());
+                Logger.d("taskmap size : " + engine.taskMap.size());
             }
         };
         try {

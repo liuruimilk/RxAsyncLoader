@@ -8,7 +8,6 @@ import com.eiben.asyncloader.base.ITask;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
@@ -30,13 +29,6 @@ public class DataEngine {
      */
     Map<Integer, String> taskMap = Collections
             .synchronizedMap(new HashMap<Integer, String>());
-
-    /**
-     * key:group的唯一ID,订单页采用订单号
-     * value:view id 合集
-     */
-    Map<Integer, List<Integer>> groupTaskMap = Collections
-            .synchronizedMap(new HashMap<Integer, List<Integer>>());
 
     DataSource dataSource = new DataSource();
 
@@ -143,10 +135,8 @@ public class DataEngine {
                     @Override
                     public void call() {
                         Logger.d("doOnSubscribe");
-                        View view = data.getView().get();
-                        if (null != view) {
-                            addTask(view.getId(), data.getUri().uri);
-                        }
+                        addTask(data.getID(), data.getUri().uri);
+                        Logger.d("taskmap size : " + taskMap.size());
                     }
                 });
 
