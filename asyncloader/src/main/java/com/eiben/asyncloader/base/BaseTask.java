@@ -1,4 +1,4 @@
-package com.eiben.asyncloader.loader.base;
+package com.eiben.asyncloader.base;
 
 import android.view.View;
 
@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference;
  * Created by liumingrui on 16/9/25.
  */
 
-public abstract class BaseParam implements IParam {
+public abstract class BaseTask implements ITask {
 
     private IData data;
 
@@ -17,13 +17,13 @@ public abstract class BaseParam implements IParam {
         return data;
     }
 
-    public BaseParam(IData data) {
+    public BaseTask(IData data) {
         this.data = data;
     }
 
     @Override
-    public String getUrl() {
-        return data.getUrl();
+    public LoadUri getUri() {
+        return data.getUri();
     }
 
     @Override

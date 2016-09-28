@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.eiben.asyncloader.loader.AsyncLoader;
+import com.eiben.asyncloader.AsyncLoader;
+import com.eiben.asyncloader.base.LoadUri;
 import com.eiben.test.R;
-import com.eiben.test.rxorder.model.AddressParam;
-import com.eiben.test.rxorder.model.PriceParam;
-import com.eiben.test.rxorder.model.UserParam;
+import com.eiben.test.rxorder.load.address.AddressData;
+import com.eiben.test.rxorder.load.address.AddressTask;
 
 
 public class RxOrderActivity extends AppCompatActivity {
@@ -65,13 +65,9 @@ public class RxOrderActivity extends AppCompatActivity {
     }
 
     public void click(View v) {
-        AsyncLoader.getInstance().load(new PriceParam("com.eiben1", tv1), new AddressParam("com.zhouxue2", tv2), new UserParam("com.liumingrui3", tv3));
-        AsyncLoader.getInstance().load(new PriceParam("com.eiben4", tv4), new AddressParam("com.zhouxue5", tv5), new UserParam("com.liumingrui6", tv6));
-        AsyncLoader.getInstance().load(new PriceParam("com.eiben7", tv7), new AddressParam("com.zhouxue8", tv8), new UserParam("com.liumingrui9", tv9));
-        AsyncLoader.getInstance().load(new PriceParam("com.eiben10", tv10), new AddressParam("com.zhouxue11", tv11), new UserParam("com.liumingrui12", tv12));
-        AsyncLoader.getInstance().load(new PriceParam("com.eiben13", tv13), new AddressParam("com.zhouxue14", tv14), new UserParam("com.liumingrui15", tv15));
-
-        AsyncLoader.getInstance().load(new AddressParam("xihuan", tv16));
+        AddressData addressData = new AddressData(LoadUri.createTextLoadUri("yongche.com", "eiben"), tv1);
+        AddressTask task = new AddressTask(addressData);
+        AsyncLoader.getInstance().load(task);
     }
 
     public void clearData(View v) {

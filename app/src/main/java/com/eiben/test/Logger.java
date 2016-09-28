@@ -9,6 +9,6 @@ import android.util.Log;
 public class Logger {
 
     public static void d(String log) {
-        Log.d("liumingrui", log);
+        Log.d("lmr", log);
     }
 }

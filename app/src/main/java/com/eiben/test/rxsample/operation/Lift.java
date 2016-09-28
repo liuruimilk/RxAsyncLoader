@@ -22,7 +22,7 @@ public class Lift {
             }
         }).lift(new Observable.Operator<String, Integer>() {
             @Override
-            public Subscriber<? super Integer> call(Subscriber<? super String> subscriber) {
+            public Subscriber<? super Integer> call(final Subscriber<? super String> subscriber) {
                 return new Subscriber<Integer>() {
                     @Override
                     public void onCompleted() {

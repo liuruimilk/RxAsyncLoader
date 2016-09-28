@@ -1,4 +1,4 @@
-package com.eiben.asyncloader.loader.base;
+package com.eiben.asyncloader.base;
 
 import android.view.View;
 
@@ -10,19 +10,20 @@ import java.lang.ref.WeakReference;
 
 public class BaseData implements IData {
 
-    protected String url;
+    protected LoadUri uri;
     protected String data = "";
     protected int errorCode = 0;
     protected WeakReference<View> view;
 
-    public BaseData(String url, View view) {
-        this.url = url;
+    public BaseData(LoadUri uri, View view) {
+        this.uri = uri;
         this.view = new WeakReference<>(view);
     }
 
+
     @Override
-    public String getUrl() {
-        return url;
+    public LoadUri getUri() {
+        return this.uri;
     }
 
     @Override

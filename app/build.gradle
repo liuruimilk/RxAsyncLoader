@@ -10,9 +10,6 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        jackOptions {
-            enabled true
-        }
     }
     buildTypes {
         release {
@@ -21,8 +18,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_7
     }
 }
 
@@ -33,6 +30,8 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.code.gson:gson-parent:2.7'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp:okhttp-apache:2.5.0'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
     compile project(':asyncloader')
 }

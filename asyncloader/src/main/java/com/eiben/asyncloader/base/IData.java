@@ -1,4 +1,4 @@
-package com.eiben.asyncloader.loader.base;
+package com.eiben.asyncloader.base;
 
 import android.view.View;
 
@@ -10,7 +10,7 @@ import java.lang.ref.WeakReference;
 
 public interface IData {
 
-    String getUrl();
+    LoadUri getUri();
 
     void setData(String data);
 
